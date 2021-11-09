@@ -13,14 +13,15 @@ public class License {
             throw new IllegalArgumentException("Такого номера не существует.");
         }
         this.lisenceNum = lisenceNum;
-        this.region = getRegion();
+        this.region = findRegion();
     }
 
     public static boolean checkLicense(String num) {
-        return num.matches("[АВЕКМНОРСТУХ]{2}[0123456789]{3}[АВЕКМНОРСТУХ][0123456789]{2}");
+        return num.matches("[АВЕКМНОРСТУХ]{1}[0123456789]{3}[АВЕКМНОРСТУХ]{2}[0123456789]{2}");
     }
 
-    private enumLicense getRegion() {
+    //Получение региона машины
+    private enumLicense findRegion() {
         String regionNum = this.lisenceNum.substring(6);
         List<enumLicense> regArray = new ArrayList<enumLicense>(Arrays.asList(enumLicense.values()));
         for (enumLicense regionInArray : regArray) {
@@ -32,11 +33,16 @@ public class License {
         return null;
     }
 
+    public String getLisenceNum() {
+        return lisenceNum;
+    }
+
+    public enumLicense getRegion() {
+        return region;
+    }
+
     @Override
     public String toString() {
-        return "License{" +
-                "lisenceNum='" + lisenceNum + '\'' +
-                ", region=" + region +
-                '}';
+        return "Гос. номер: " + lisenceNum + ", Регион: " + region;
     }
 }
