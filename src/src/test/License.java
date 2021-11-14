@@ -6,7 +6,7 @@ import java.util.List;
 
 public class License {
     private String lisenceNum;
-    private enumLicense region;
+    private LicenseConst region;
 
     public License(String lisenceNum) {
         if (!checkLicense(lisenceNum)) {
@@ -21,10 +21,10 @@ public class License {
     }
 
     //Получение региона машины
-    private enumLicense findRegion() {
+    private LicenseConst findRegion() {
         String regionNum = this.lisenceNum.substring(6);
-        List<enumLicense> regArray = new ArrayList<enumLicense>(Arrays.asList(enumLicense.values()));
-        for (enumLicense regionInArray : regArray) {
+        List<LicenseConst> regArray = new ArrayList<LicenseConst>(Arrays.asList(LicenseConst.values()));
+        for (LicenseConst regionInArray : regArray) {
             List<Integer> numArray = new ArrayList<Integer>(Arrays.asList(regionInArray.getDigitArray()));
             if (numArray.contains(Integer.parseInt(regionNum))) {
                 return regionInArray;
@@ -37,7 +37,7 @@ public class License {
         return lisenceNum;
     }
 
-    public enumLicense getRegion() {
+    public LicenseConst getRegion() {
         return region;
     }
 
